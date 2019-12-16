@@ -33,11 +33,16 @@ window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.1.1"></he
 \begin{align}
 \mathbf{p'} &= \mathbf{q} \mathbf{p} \mathbf{q}^{-1} \\
 & =( q_0+q_1\bf{i}+q_2\bf{j}+q_3\bf{k} )(p_x\mathbf{i} + p_y\mathbf{j} + p_z\mathbf{k})(q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
-& =[-q_1p_x-q_2p_y-q_3p_z+(q_0p_x-q_2p_z-q_3p_y)\bf{i}+(q_0p_y-q_1p_z+q_3p_x)\bf{j}+(q_0p_z+q_1p_z-q_2p_x)\bf{k}](q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
-& = (-q_0q_1p_k-q_0q_2p_y-q_0q_3p_z)+(q_1^2q_x+q_1q_2p_y+q_1q_3p_z)\bf{i}+(q_1q_2p_x+q_2^2p_y+q_2q_3p_z)\bf{j}+(q_1q_3p_x+q_2q_3p_y+q_3^2p_z)\bf{k}+ \\
-& \quad (q_0q_1p_x-q_1q_2p_z-q_1q_3p_y)+(q_0^2p_x-q_0q_2p_z-q_0q_3p_y)\bf{i}+(q_0q_3p_x-q_2q_3p_z-q_3^2p_y)\bf{j}+(-q_0q_2p_x+q_2^2p_z+q_2q_3p_y)\bf{k}+\\
-& \quad (q_0q_2p_y-q_1q_2p_z+q_2q_3p_x)+(-q_0q_3p_y+q_1q_3p_z-q_3^2p_x)\bf{i}+(q_0^2p_y-q_0q_1p_z+q_0q_3p_x)\bf{j}+(q_0q_1p_y-q_1^2p_z+q_1q_3p_x)\bf{k}+\\
-& \quad (q_0q_3p_z+q_1q_3p_y-q_2q_3p_x)+(q_0q_2p_z+q_1q_2p_y-q_2^2p_x)\bf{i}+(-q_0q_1p_z-q_1^2p_y+q_1q_2p_x)\bf{j}+(q_0^2-q_0q_1p_y-q_0q_2p_x)\bf{k}\\
+& =[-q_1p_x-q_2p_y-q_3p_z+(q_0p_x-q_2p_z-q_3p_y)\bf{i}+\\
+&\quad (q_0p_y-q_1p_z+q_3p_x)\bf{j}+(q_0p_z+q_1p_z-q_2p_x)\bf{k}](q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
+& = (-q_0q_1p_k-q_0q_2p_y-q_0q_3p_z)+(q_1^2q_x+q_1q_2p_y+q_1q_3p_z)\bf{i}+\\
+&\quad(q_1q_2p_x+q_2^2p_y+q_2q_3p_z)\bf{j}+(q_1q_3p_x+q_2q_3p_y+q_3^2p_z)\bf{k}+ \\
+& \quad (q_0q_1p_x-q_1q_2p_z-q_1q_3p_y)+(q_0^2p_x-q_0q_2p_z-q_0q_3p_y)\bf{i}+\\
+&\quad(q_0q_3p_x-q_2q_3p_z-q_3^2p_y)\bf{j}+(-q_0q_2p_x+q_2^2p_z+q_2q_3p_y)\bf{k}+\\
+& \quad (q_0q_2p_y-q_1q_2p_z+q_2q_3p_x)+(-q_0q_3p_y+q_1q_3p_z-q_3^2p_x)\bf{i}+\\
+&\quad(q_0^2p_y-q_0q_1p_z+q_0q_3p_x)\bf{j}+(q_0q_1p_y-q_1^2p_z+q_1q_3p_x)\bf{k}+\\
+& \quad (q_0q_3p_z+q_1q_3p_y-q_2q_3p_x)+(q_0q_2p_z+q_1q_2p_y-q_2^2p_x)\bf{i}+\\
+&\quad(-q_0q_1p_z-q_1^2p_y+q_1q_2p_x)\bf{j}+(q_0^2-q_0q_1p_y-q_0q_2p_x)\bf{k}\\
 & = [(1-2q_2^2-2q_3^2)p_x+(2q_1q_2-2q_0q_3)p_y+(2q_1q_3+2q_0q_2)p_z]\bf{i}+\\
 &\quad [(2q_1q_2+2q_0q_3)p_x+(1-2q_1^2-2q_3^2)p_y+(2q_2q_3-2q_0q_1)p_z]\bf{j}+\\
 &\quad [(2q_1q_3-2q_0q_2)p_x+(2q_2q_3+2q_0q_1)p_y+(1-2q_1^2-2q_2^2)p_z]\bf{k}\\
@@ -51,13 +56,23 @@ p_z
 <li><p>画表总结旋转矩阵、轴角、欧拉角、四元数的转换关系。</p>
 </li>
 </ol>
-<pre><code>  |                 | rotation matrix                                              | axis angle                                                   | Euler angle | quaternion                                                   |
-  | --------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ----------- | ------------------------------------------------------------ |
-  | rotation matrix |                                                              | $R=cos\theta\bf{I}+(1-cos\theta)\bf{nn^T}+sin\theta\bf{n^\wedge } \\ \theta =arcos\left(\frac{tr(R)-1}{2}\right),\bf{Rn=n}$ |             | $ R = \left[ {\begin{array}{*{20}{c}}{1 - 2q_2^2 - 2q_3^2}&amp;{2{q_1}{q_2} - 2{q_0}{q_3}}&amp;{2{q_1}{q_3} + 2{q_0}{q_2}}\\{2{q_1}{q_2} + 2{q_0}{q_3}}&amp;{1 - 2q_1^2 - 2q_3^2}&amp;{2{q_2}{q_3} - 2{q_0}{q_1}}\\{2{q_1}{q_3} - 2{q_0}{q_2}}&amp;{2{q_2}{q_3} + 2{q_0}{q_1}}&amp;{1 - 2q_1^2 - 2q_2^2}\end{array}} \right]\\{q_0} = \frac{{\sqrt {tr(R) + 1} }}{2},{q_1} = \frac{{{m_{23}} - {m_{32}}}}{{4{q_0}}},{q_2} = \frac{{{m_{31}} - {m_{13}}}}{{4{q_0}}},{q_3} = \frac{{{m_{12}} - {m_{21}}}}{{4{q_0}}} $ |
-  | axis angle      |                                                              |                                                              |             | $\bf{q}=\left[ cos\frac{\theta}{2},n_xsin\frac{\theta}{2},n_ysin\frac{\theta}{2},n_zsin\frac{\theta}{2}\right]^T \\ \left \{ {\begin{array}{*{20}{c}}\theta =2\arccos{q_0}\\\left[n_x,n_y,n_z\right]^T=[q_1,q_2,q_3]^T/sin\frac{\theta}{2}\end{array}}\\ \right . $ |
-  | Euler angle     |                                                              |                                                              |             | to do                                                        |
-  | quaternion      | $ R = \left[ {\begin{array}{*{20}{c}}{1 - 2q_2^2 - 2q_3^2}&amp;{2{q_1}{q_2} - 2{q_0}{q_3}}&amp;{2{q_1}{q_3} + 2{q_0}{q_2}}\\{2{q_1}{q_2} + 2{q_0}{q_3}}&amp;{1 - 2q_1^2 - 2q_3^2}&amp;{2{q_2}{q_3} - 2{q_0}{q_1}}\\{2{q_1}{q_3} - 2{q_0}{q_2}}&amp;{2{q_2}{q_3} + 2{q_0}{q_1}}&amp;{1 - 2q_1^2 - 2q_2^2}\end{array}} \right]\\{q_0} = \frac{{\sqrt {tr(R) + 1} }}{2},{q_1} = \frac{{{m_{23}} - {m_{32}}}}{{4{q_0}}},{q_2} = \frac{{{m_{31}} - {m_{13}}}}{{4{q_0}}},{q_3} = \frac{{{m_{12}} - {m_{21}}}}{{4{q_0}}} $ | $\bf{q}=\left[ cos\frac{\theta}{2},n_xsin\frac{\theta}{2},n_ysin\frac{\theta}{2},n_zsin\frac{\theta}{2}\right]^T \\ \left \{ {\begin{array}{*{20}{c}}\theta =2\arccos{q_0}\\\left[n_x,n_y,n_z\right]^T=[q_1,q_2,q_3]^T/sin\frac{\theta}{2}\end{array}}\\ \right . $ | to do       | to do                                                        |
-</code></pre><ol>
+<p>rotation matrix and axis angle:</p>
+<script type="math/tex; mode=display">
+R=cos\theta\bf{I}+(1-cos\theta)\bf{nn^T}+sin\theta\bf{n^\wedge } \\ \theta =arcos\left(\frac{tr(R)-1}{2}\right),\bf{Rn=n}</script><p>roation matrix and Euler angle:</p>
+<p>to do </p>
+<p>rotation matrix and quaternion:</p>
+<script type="math/tex; mode=display">
+R = \left[ {\begin{array}{*{20}{c}}{1 - 2q_2^2 - 2q_3^2}&{2{q_1}{q_2} - 2{q_0}{q_3}}&{2{q_1}{q_3} + 2{q_0}{q_2}}\\{2{q_1}{q_2} + 2{q_0}{q_3}}&{1 - 2q_1^2 - 2q_3^2}&{2{q_2}{q_3} - 2{q_0}{q_1}}\\{2{q_1}{q_3} - 2{q_0}{q_2}}&{2{q_2}{q_3} + 2{q_0}{q_1}}&{1 - 2q_1^2 - 2q_2^2}\end{array}} \right]</script><script type="math/tex; mode=display">
+q_0= \frac{\sqrt {tr(R) + 1}}{2}\\
+q_1= \frac{m_{23} - m_{32}}{4{q_0}}\\
+q_2= \frac{m_{31} - m_{13}}{4{q_0}}\\
+q_3= \frac{m_{12}-m_{21}}{4{q_0}}</script><p>axis angle and Euler angle</p>
+<p>to do</p>
+<p>axis angle and quaternion</p>
+<script type="math/tex; mode=display">
+\bf{q}=\left[ cos\frac{\theta}{2},n_xsin\frac{\theta}{2},n_ysin\frac{\theta}{2},n_zsin\frac{\theta}{2}\right]^T \\ \left \{ {\begin{array}{*{20}{c}}\theta =2\arccos{q_0}\\\left[n_x,n_y,n_z\right]^T=[q_1,q_2,q_3]^T/sin\frac{\theta}{2}\end{array}}\\ \right .</script><p>Euler angle and quaternion</p>
+<p>to do</p>
+<ol>
 <li><p>假设我有一个大的Eigen 矩阵，我想把它的左上角3×3的块取出来，然后赋值为<br>   $I_{3×3}$请编程实现此事。</p>
 <p>   to do</p>
 </li>
