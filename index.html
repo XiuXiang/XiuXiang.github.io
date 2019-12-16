@@ -17,46 +17,37 @@ var CONFIG = {
   prompt: {"copy_success":"Copy Success","copy_error":"Copy Error","creative_commons":"Creative Commons","copy_button":"Click to Copy"}
 };
 
-window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>Home</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>Archives</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>Categories</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>Tags</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/about/"><i class="fa fa-user"></i>About</a></div></div><div class="header-nav-search"><i class="fa fa-search"></i><span>Search</span></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">SLAM</div><div class="header-info-subtitle">Robotics SLAM ...</div></div><div class="header-info-scrolldown"><i class="fa fa-angle-down header-info-scrolldown__icon"></i></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home"><section class="post-list"><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2019/12/15/%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2-%E8%AF%BE%E5%90%8E%E9%A2%98-ch3/">视觉SLAM十四讲 课后题 ch3</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2019-12-15</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2019-12-16</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><ol>
-<li><p>验证旋转矩阵是正交矩阵。</p>
-<p>$ \bf{e} $ is the bias of the old coordinate system, $ \bf{e<em>{new}} $ is the rotated coordinate system,  so the rotation matrix could defined as $ R = e^Te</em>{new} $ , $ R^TR = e<em>{new}^Tee^Te</em>{new} = E$ , so the rotation matrix is orthogonal matrix.</p>
-</li>
-<li><p>寻找罗德里格斯公式的推导过程并理解它。</p>
-<p><a href="[https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula](https://en.wikipedia.org/wiki/Rodrigues&#39;_rotation_formula">the wiki link of Rodrigues’s rotation formula</a>)</p>
-</li>
-<li><p>验证四元数旋转某个点后，结果是一个虚四元数（实部为零），所以仍然对应到一个<br>三维空间点（式3.34）。</p>
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>Home</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>Archives</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>Categories</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>Tags</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/about/"><i class="fa fa-user"></i>About</a></div></div><div class="header-nav-search"><i class="fa fa-search"></i><span>Search</span></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">SLAM</div><div class="header-info-subtitle">Robotics SLAM ...</div></div><div class="header-info-scrolldown"><i class="fa fa-angle-down header-info-scrolldown__icon"></i></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home"><section class="post-list"><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2019/12/15/%E8%A7%86%E8%A7%89SLAM%E5%8D%81%E5%9B%9B%E8%AE%B2-%E8%AF%BE%E5%90%8E%E9%A2%98-ch3/">视觉SLAM十四讲 课后题 ch3</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2019-12-15</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2019-12-16</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><h3 id="验证旋转矩阵是正交矩阵。"><span class="heading-link">验证旋转矩阵是正交矩阵。</span></h3><p>$\bf{e,e_{new}}$</p>
+<p> $\bf{R=e^Te<em>{new}},R^TR=e</em>{new}^Tee^Te_{new}=E$</p>
+<h3 id="寻找罗德里格斯公式的推导过程并理解它。"><span class="heading-link">寻找罗德里格斯公式的推导过程并理解它。</span></h3><p>   <a href="[https://en.wikipedia.org/wiki/Rodrigues%27_rotation_formula](https://en.wikipedia.org/wiki/Rodrigues&#39;_rotation_formula">the wiki link of Rodrigues’s rotation formula</a>)</p>
+<h3 id="验证四元数旋转某个点后，结果是一个虚四元数（实部为零），所以仍然对应到一个三维空间点（式3-34）。"><span class="heading-link">验证四元数旋转某个点后，结果是一个虚四元数（实部为零），所以仍然对应到一个三维空间点（式3.34）。</span></h3><script type="math/tex; mode=display">
+   \mathbf{q}=q_0+q_1\bf{i}+q_2\bf{j}+q_3\bf{k}
+   \\
+   \mathbf{q}^{-1} = q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}</script><p>It can be shown that the desired rotation can be applied to an ordinary vector $ \mathbf{p} = (p_x, p_y, p_z) = p_x\mathbf{i} + p_y\mathbf{j} + p_z\mathbf{k} $  in 3-dimensional space, considered as a quaternion with a real coordinate equal to zero, by evaluating the conjugation of <strong>p</strong> by <strong>q</strong>: $ \mathbf{p’} = \mathbf{q} \mathbf{p} \mathbf{q}^{-1} $</p>
 <script type="math/tex; mode=display">
-\mathbf{q}=q_0+q_1\bf{i}+q_2\bf{j}+q_3\bf{k}
-\\
-\mathbf{q}^{-1} = q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}</script><p> It can be shown that the desired rotation can be applied to an ordinary vector $ \mathbf{p} = (p_x, p_y, p_z) = p_x\mathbf{i} + p_y\mathbf{j} + p_z\mathbf{k} $  in 3-dimensional space, considered as a quaternion with a real coordinate equal to zero, by evaluating the conjugation of <strong>p</strong> by <strong>q</strong>: $ \mathbf{p’} = \mathbf{q} \mathbf{p} \mathbf{q}^{-1} $ </p>
-<script type="math/tex; mode=display">
-\begin{align}
-\mathbf{p'} &= \mathbf{q} \mathbf{p} \mathbf{q}^{-1} \\
-& =( q_0+q_1\bf{i}+q_2\bf{j}+q_3\bf{k} )(p_x\mathbf{i} + p_y\mathbf{j} + p_z\mathbf{k})(q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
-& =[-q_1p_x-q_2p_y-q_3p_z+(q_0p_x-q_2p_z-q_3p_y)\bf{i}+\\
-&\quad (q_0p_y-q_1p_z+q_3p_x)\bf{j}+(q_0p_z+q_1p_z-q_2p_x)\bf{k}](q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
-& = (-q_0q_1p_k-q_0q_2p_y-q_0q_3p_z)+(q_1^2q_x+q_1q_2p_y+q_1q_3p_z)\bf{i}+\\
-&\quad(q_1q_2p_x+q_2^2p_y+q_2q_3p_z)\bf{j}+(q_1q_3p_x+q_2q_3p_y+q_3^2p_z)\bf{k}+ \\
-& \quad (q_0q_1p_x-q_1q_2p_z-q_1q_3p_y)+(q_0^2p_x-q_0q_2p_z-q_0q_3p_y)\bf{i}+\\
-&\quad(q_0q_3p_x-q_2q_3p_z-q_3^2p_y)\bf{j}+(-q_0q_2p_x+q_2^2p_z+q_2q_3p_y)\bf{k}+\\
-& \quad (q_0q_2p_y-q_1q_2p_z+q_2q_3p_x)+(-q_0q_3p_y+q_1q_3p_z-q_3^2p_x)\bf{i}+\\
-&\quad(q_0^2p_y-q_0q_1p_z+q_0q_3p_x)\bf{j}+(q_0q_1p_y-q_1^2p_z+q_1q_3p_x)\bf{k}+\\
-& \quad (q_0q_3p_z+q_1q_3p_y-q_2q_3p_x)+(q_0q_2p_z+q_1q_2p_y-q_2^2p_x)\bf{i}+\\
-&\quad(-q_0q_1p_z-q_1^2p_y+q_1q_2p_x)\bf{j}+(q_0^2-q_0q_1p_y-q_0q_2p_x)\bf{k}\\
-& = [(1-2q_2^2-2q_3^2)p_x+(2q_1q_2-2q_0q_3)p_y+(2q_1q_3+2q_0q_2)p_z]\bf{i}+\\
-&\quad [(2q_1q_2+2q_0q_3)p_x+(1-2q_1^2-2q_3^2)p_y+(2q_2q_3-2q_0q_1)p_z]\bf{j}+\\
-&\quad [(2q_1q_3-2q_0q_2)p_x+(2q_2q_3+2q_0q_1)p_y+(1-2q_1^2-2q_2^2)p_z]\bf{k}\\
-&= \left[ {\begin{array}{*{20}{c}}{1 - 2q_2^2 - 2q_3^2}&{2{q_1}{q_2} - 2{q_0}{q_3}}&{2{q_1}{q_3} + 2{q_0}{q_2}}\\{2{q_1}{q_2} + 2{q_0}{q_3}}&{1 - 2q_1^2 - 2q_3^2}&{2{q_2}{q_3} - 2{q_0}{q_1}}\\{2{q_1}{q_3} - 2{q_0}{q_2}}&{2{q_2}{q_3} + 2{q_0}{q_1}}&{1 - 2q_1^2 - 2q_2^2}\end{array}} \right] 
-\left[ {\begin{array}{*{20}{c}}
-p_x\\
-p_y\\
-p_z
-\end{array}} \right]
-\end{align}</script></li>
-<li><p>画表总结旋转矩阵、轴角、欧拉角、四元数的转换关系。</p>
-</li>
-</ol>
-<p>rotation matrix and axis angle:</p>
+   \begin{align}
+   \mathbf{p'} &= \mathbf{q} \mathbf{p} \mathbf{q}^{-1} \\
+   & =( q_0+q_1\bf{i}+q_2\bf{j}+q_3\bf{k} )(p_x\mathbf{i} + p_y\mathbf{j} + p_z\mathbf{k})(q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
+   & =[-q_1p_x-q_2p_y-q_3p_z+(q_0p_x-q_2p_z-q_3p_y)\bf{i}+\\
+   &\quad (q_0p_y-q_1p_z+q_3p_x)\bf{j}+(q_0p_z+q_1p_z-q_2p_x)\bf{k}](q_0-q_1\bf{i}-q_2\bf{j}-q_3\bf{k}) \\
+   & = (-q_0q_1p_k-q_0q_2p_y-q_0q_3p_z)+(q_1^2q_x+q_1q_2p_y+q_1q_3p_z)\bf{i}+\\
+   &\quad(q_1q_2p_x+q_2^2p_y+q_2q_3p_z)\bf{j}+(q_1q_3p_x+q_2q_3p_y+q_3^2p_z)\bf{k}+ \\
+   & \quad (q_0q_1p_x-q_1q_2p_z-q_1q_3p_y)+(q_0^2p_x-q_0q_2p_z-q_0q_3p_y)\bf{i}+\\
+   &\quad(q_0q_3p_x-q_2q_3p_z-q_3^2p_y)\bf{j}+(-q_0q_2p_x+q_2^2p_z+q_2q_3p_y)\bf{k}+\\
+   & \quad (q_0q_2p_y-q_1q_2p_z+q_2q_3p_x)+(-q_0q_3p_y+q_1q_3p_z-q_3^2p_x)\bf{i}+\\
+   &\quad(q_0^2p_y-q_0q_1p_z+q_0q_3p_x)\bf{j}+(q_0q_1p_y-q_1^2p_z+q_1q_3p_x)\bf{k}+\\
+   & \quad (q_0q_3p_z+q_1q_3p_y-q_2q_3p_x)+(q_0q_2p_z+q_1q_2p_y-q_2^2p_x)\bf{i}+\\
+   &\quad(-q_0q_1p_z-q_1^2p_y+q_1q_2p_x)\bf{j}+(q_0^2-q_0q_1p_y-q_0q_2p_x)\bf{k}\\
+   & = [(1-2q_2^2-2q_3^2)p_x+(2q_1q_2-2q_0q_3)p_y+(2q_1q_3+2q_0q_2)p_z]\bf{i}+\\
+   &\quad [(2q_1q_2+2q_0q_3)p_x+(1-2q_1^2-2q_3^2)p_y+(2q_2q_3-2q_0q_1)p_z]\bf{j}+\\
+   &\quad [(2q_1q_3-2q_0q_2)p_x+(2q_2q_3+2q_0q_1)p_y+(1-2q_1^2-2q_2^2)p_z]\bf{k}\\
+   &= \left[ {\begin{array}{*{20}{c}}{1 - 2q_2^2 - 2q_3^2}&{2{q_1}{q_2} - 2{q_0}{q_3}}&{2{q_1}{q_3} + 2{q_0}{q_2}}\\{2{q_1}{q_2} + 2{q_0}{q_3}}&{1 - 2q_1^2 - 2q_3^2}&{2{q_2}{q_3} - 2{q_0}{q_1}}\\{2{q_1}{q_3} - 2{q_0}{q_2}}&{2{q_2}{q_3} + 2{q_0}{q_1}}&{1 - 2q_1^2 - 2q_2^2}\end{array}} \right] 
+   \left[ {\begin{array}{*{20}{c}}
+   p_x\\
+   p_y\\
+   p_z
+   \end{array}} \right]
+   \end{align}</script><h3 id="画表总结旋转矩阵、轴角、欧拉角、四元数的转换关系。"><span class="heading-link">画表总结旋转矩阵、轴角、欧拉角、四元数的转换关系。</span></h3><p>rotation matrix and axis angle:</p>
 <script type="math/tex; mode=display">
 R=cos\theta\bf{I}+(1-cos\theta)\bf{nn^T}+sin\theta\bf{n^\wedge } \\ \theta =arcos\left(\frac{tr(R)-1}{2}\right),\bf{Rn=n}</script><p>roation matrix and Euler angle:</p>
 <p>to do </p>
@@ -72,19 +63,9 @@ q_3= \frac{m_{12}-m_{21}}{4{q_0}}</script><p>axis angle and Euler angle</p>
 <script type="math/tex; mode=display">
 \bf{q}=\left[ cos\frac{\theta}{2},n_xsin\frac{\theta}{2},n_ysin\frac{\theta}{2},n_zsin\frac{\theta}{2}\right]^T \\ \left \{ {\begin{array}{*{20}{c}}\theta =2\arccos{q_0}\\\left[n_x,n_y,n_z\right]^T=[q_1,q_2,q_3]^T/sin\frac{\theta}{2}\end{array}}\\ \right .</script><p>Euler angle and quaternion</p>
 <p>to do</p>
-<ol>
-<li><p>假设我有一个大的Eigen 矩阵，我想把它的左上角3×3的块取出来，然后赋值为<br>   $I_{3×3}$请编程实现此事。</p>
-<p>   to do</p>
-</li>
-<li><p>*一般线程方程Ax = b 有哪几种做法？你能在Eigen 中实现吗？</p>
-<p>to do</p>
-</li>
-</ol>
-<ol>
-<li><p>设有小萝卜一号和小萝卜二号位于世界坐标系中。小萝卜一号的位姿为：$q<em>1 =[0.35,0.2,0.3,0.1]$;$ t_2 = [0.3,0.1,0.1]^T$ （q 的第一项为实部。请你把q 归一化后再进行计算）。这里的$q $和$t$ 表达的是$T</em>{cw}$，也就是世界到相机的变换关系。小萝卜二号的位姿为$q_2 = [0.5,0.4,0.1,0.2]; t = [0.1,0.5,0.3]^T $。现在，小萝卜一号看到某个点在自身的坐标系下，坐标为$p = [0.5,0,0.2]^T $，求该向量在小萝卜二号坐标系下的坐标。请编程实现此事。</p>
-<p>to do</p>
-</li>
-</ol>
+<h3 id="假设我有一个大的Eigen-矩阵，我想把它的左上角3×3的块取出来，然后赋值为-I-3×3-请编程实现此事。"><span class="heading-link">假设我有一个大的Eigen 矩阵，我想把它的左上角3×3的块取出来，然后赋值为$I_{3×3}$请编程实现此事。</span></h3><p>to do</p>
+<h3 id="一般线程方程Ax-b-有哪几种做法？你能在Eigen-中实现吗？"><span class="heading-link">一般线程方程Ax = b 有哪几种做法？你能在Eigen 中实现吗？</span></h3><p>   to do</p>
+<h3 id="设有小萝卜一号和小萝卜二号位于世界坐标系中。小萝卜一号的位姿为：-q1-0-35-0-2-0-3-0-1-t-2-0-3-0-1-0-1-T-（q-的第一项为实部。请你把q-归一化后再进行计算）。这里的-q-和-t-表达的是-T-cw-，也就是世界到相机的变换关系。小萝卜二号的位姿为-q-2-0-5-0-4-0-1-0-2-t-0-1-0-5-0-3-T-。现在，小萝卜一号看到某个点在自身的坐标系下，坐标为-p-0-5-0-0-2-T-，求该向量在小萝卜二号坐标系下的坐标。请编程实现此事。"><span class="heading-link">设有小萝卜一号和小萝卜二号位于世界坐标系中。小萝卜一号的位姿为：$q1 =[0.35,0.2,0.3,0.1]$;$ t_2 = [0.3,0.1,0.1]^T$ （q 的第一项为实部。请你把q 归一化后再进行计算）。这里的$q $和$t$ 表达的是$T{cw}$，也就是世界到相机的变换关系。小萝卜二号的位姿为$q_2 = [0.5,0.4,0.1,0.2]; t = [0.1,0.5,0.3]^T $。现在，小萝卜一号看到某个点在自身的坐标系下，坐标为$p = [0.5,0,0.2]^T $，求该向量在小萝卜二号坐标系下的坐标。请编程实现此事。</span></h3><p>   to do</p>
 </div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2019/12/14/Doing-work/">Doing work</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2019-12-14</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2019-12-15</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><p>I think this page about passive transformation needs to change.</p>
 <script type="math/tex; mode=display">
 \bf{e}=[\bf{e_x},\bf{e_y},\bf{e_z}]^T,\bf{e_{rot}}=[\bf{e_X},\bf{e_Y},\bf{e_z}]^T</script><script type="math/tex; mode=display">
