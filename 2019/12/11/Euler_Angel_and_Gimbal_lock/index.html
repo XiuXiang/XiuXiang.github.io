@@ -1,0 +1,497 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="keywords" content="Jiang XiuXiang, SLAM"><meta name="description" content=""><title>Euler Angel and Gimbal lock</title><link rel="icon" href="/images/icons/vacuum_cleaning_robot_16px.png?v=1.5.4" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/vacuum_cleaning_robot_32px.png?v=1.5.4" type="image/png" sizes="32x32"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.5.4"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontawesome: {"prefix":"fa"},
+  sidebar: {"offsetTop":"30px","renderTocDepth":4},
+  header: {"scrollDownIcon":true},
+  back2top: {"enable":true},
+  reward: false,
+  fancybox: false,
+  zoom_image: {"enable":true,"mask_color":"rgba(0,0,0,0.6)"},
+  gallery_waterfall: undefined,
+  lazyload: undefined,
+  pjax: undefined,
+  external_link: {"icon":{"enable":true,"name":"external-link"}},
+  shortcuts: {"switch_post":false},
+  prompt: {"copy_success":"Copy Success","copy_error":"Copy Error","creative_commons":"Creative Commons","copy_button":"Click to Copy"}
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>Home</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>Archives</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>Categories</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>Tags</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/about/"><i class="fa fa-user"></i>About</a></div></div><div class="header-nav-search"><i class="fa fa-search"></i><span>Search</span></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">SLAM</div><div class="header-info-subtitle">Robotics SLAM ...</div></div><div class="header-info-scrolldown"><i class="fa fa-angle-down header-info-scrolldown__icon"></i></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content"><div class="post"><header class="post-header"><h1 class="post-header-title">Euler Angel and Gimbal lock</h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2019-12-11</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2019-12-18</span></span></div></header><div class="post-body"><h1 id="Euler-Angel-and-Gimbal-lock"><span class="heading-link">Euler Angel and Gimbal lock</span></h1><h2 id="what-is-Euler-Angel"><span class="heading-link">what is Euler Angel</span></h2><p>A rotation of 3D space can be represented numerically with Euler angels, but unfortunately they suffer from the gimbal lock problem.  </p>
+<h2 id="what-is-gimbal"><span class="heading-link">what is gimbal</span></h2><p>A gimbal is a ring that is suspended so it can rotate about an axis. Gimbals are typically nested one within another to accommodate rotation about multiple axes. </p>
+<h2 id="Gimbal-lock-in-coordinate-system"><span class="heading-link">Gimbal lock in coordinate system</span></h2><p>Gimbal lock is the loss of one degree of freedom in a three-dimensional, three-gimbal mechanism that occurs when the axes of two of the three gimbals are driven into a parallel configuration, “locking”the system into rotation in a degenerate two-dimensional space.  </p>
+<p>The word lock is misleading : no gimbal is restrained. All three gimbals can still rotate freely about their respective axes of suspension. Nevertheless, because of the parallel orientation of two of the gimbal’s axes there is no gimbal available to accommodate rotation about one axis.    </p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Gimbal_Lock_Plane.gif" alt="gimbal lock in coordinate system">  </p>
+<h3 id="normal-situation"><span class="heading-link">normal situation</span></h3><p>For example, it is possible to imagine an airplane rotated by the above-mentioned Eular angles using the <strong>X-Y-Z</strong> (<strong>r-p-y</strong>)convention.   </p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Yaw_Axis_Corrected.svg/325px-Yaw_Axis_Corrected.svg.png" alt="airplane coordinate system" title="airplane_coordinate_system"></p>
+<div class="table-container">
+<div class="table-container"><table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:left">Roll Axis</th>
+<th>Pitch Axis</th>
+<th>Yaw Axis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="text-align:left">X Axis</td>
+<td>Y Axis</td>
+<td>Z Axis</td>
+</tr>
+<tr>
+<td>Value</td>
+<td style="text-align:left">$\alpha$</td>
+<td>$\beta$</td>
+<td>$\gamma$</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<img src="/2019/12/11/Euler_Angel_and_Gimbal_lock/Gimbal_xyz.png" class> 
+<img src="/2019/12/11/Euler_Angel_and_Gimbal_lock/rotation_rpy.png" class>
+<p>A rotation in 3D space can be represented numerically with matrices in several ways. one of these representation is:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    R &= 
+        \begin{bmatrix}
+            \cos \gamma & -\sin \gamma & 0 \\
+            \sin \gamma & \cos \gamma & 0 \\
+            0 & 0 & 1 
+            \end{bmatrix} 
+        \begin{bmatrix}
+                \cos \beta & 0 & \sin \beta \\
+                0 & 1 & 0 \\
+                -\sin \beta & 0 & \cos \beta 
+                \end{bmatrix} 
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & \cos \alpha & -\sin \alpha \\
+            0 & \sin \alpha & \cos \alpha         
+            \end{bmatrix}
+        \\ 
+        &=
+            \begin{bmatrix}
+                \cos \gamma \cos \beta & -\sin \gamma & \cos \gamma \sin \beta \\
+                \sin \gamma \cos \beta & \cos \gamma & \sin \gamma \sin \beta \\
+                -\sin \beta & 0 & \cos \beta 
+            \end{bmatrix}
+            \begin{bmatrix}
+                1 & 0 & 0 \\
+                0 & \cos \alpha & -\sin \alpha \\
+                0 & \sin \alpha & \cos \alpha
+            \end{bmatrix}
+        \\
+        &= 
+            \begin{bmatrix}
+                 \cos \gamma \cos \beta & -\sin \gamma \cos \alpha + \cos \gamma \sin \beta \sin \alpha & \sin \gamma \sin \alpha + \cos \gamma \sin \beta \cos \alpha \\
+                \sin \gamma \cos \beta & \cos \gamma \cos \alpha + \sin \gamma \sin \beta \sin \alpha & -\cos \gamma \sin \alpha + \sin \gamma \sin \beta \cos \alpha \\
+                -\sin \beta & \cos \beta \sin \alpha & \cos \beta \cos \alpha 
+            \end{bmatrix}
+\end{align}</script><h3 id="Gimbal-Lock-situation"><span class="heading-link">Gimbal Lock situation</span></h3><img src="/2019/12/11/Euler_Angel_and_Gimbal_lock/Gimbal_Lock.gif" class>
+<p>An example worth examining happens when  $\beta = \frac{\pi}{2}$. Knowing that $\cos \frac{\pi}{2} = 0$ and $\sin \frac{\pi}{2} = 1$.  The above expression becomes equal to:  </p>
+<script type="math/tex; mode=display">
+\begin{align}
+    R &= 
+        \begin{bmatrix}
+            \cos \gamma & -\sin \gamma & 0 \\
+            \sin \gamma & \cos \gamma & 0 \\
+            0 & 0 & 1 
+            \end{bmatrix} 
+        \begin{bmatrix}
+                \cos \beta & 0 & \sin \beta \\
+                0 & 1 & 0 \\
+                -\sin \beta & 0 & \cos \beta 
+                \end{bmatrix} 
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & \cos \alpha & -\sin \alpha \\
+            0 & \sin \alpha & \cos \alpha         
+            \end{bmatrix}
+        \\
+        &=  
+        \begin{bmatrix}
+            \cos \gamma & -\sin \gamma & 0 \\
+            \sin \gamma & \cos \gamma & 0 \\
+            0 & 0 & 1 
+            \end{bmatrix} 
+        \begin{bmatrix}
+                0 & 0 & 1 \\
+                0 & 1 & 0 \\
+                -1 & 0 & 0 
+                \end{bmatrix} 
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & \cos \alpha & -\sin \alpha \\
+            0 & \sin \alpha & \cos \alpha         
+            \end{bmatrix}
+        \\
+        &=
+        \begin{bmatrix}
+            0 & -\sin \gamma & \cos \gamma \\
+            0 & \cos \gamma & \sin \gamma \\
+            -1 & 0 & 0         
+            \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & \cos \alpha & -\sin \alpha \\
+            0 & \sin \alpha & \cos \alpha         
+            \end{bmatrix}
+        \\
+        &=
+        \begin{bmatrix}
+            0 & -\sin \gamma \cos \alpha + \cos \gamma \sin \alpha & \sin \gamma \sin \alpha + \cos \gamma \cos \alpha \\
+            0 & \cos \gamma \cos \alpha + \sin \gamma \sin \alpha & -\cos \gamma \sin \alpha + \sin \gamma \cos \alpha \\
+            -1 & 0 & 0
+        \end{bmatrix}
+        \\
+        &=
+        \begin{bmatrix}
+            0 & -\sin (\gamma - \alpha) & \cos (\gamma - \alpha)\\
+            0 & \cos (\gamma - \alpha) & \sin (\gamma - \alpha)\\
+            -1 & 0 & 0
+        \end{bmatrix}
+\end{align}</script><p>When near or at the singularity, changing the value of $\gamma$ and $\alpha$ in the above matrix has the same effects : the rotation angle $\gamma - \alpha$ changes, but the rotation axis remain in th Z dirction : the first column and the last row in the matrix won’t change. The only solution for $\alpha$ and $\gamma$ to recover different roles is to change $\beta$ .  </p>
+<h2 id="what’s-the-effect-of-gimbal-lock"><span class="heading-link">what’s the effect of gimbal lock</span></h2><h3 id="The-effect-of-gimbal-lock-in-video-game"><span class="heading-link">The effect of gimbal lock in video game</span></h3><p>Loss  one degree of freedom in a three-dimensional.  </p>
+<img src="/2019/12/11/Euler_Angel_and_Gimbal_lock/After_Gimbal_Lock.gif" class>
+<p>The arrow does not rotate to the destination Angle according to the straight path. The path is an arc. </p>
+<img src="/2019/12/11/Euler_Angel_and_Gimbal_lock/double_move.gif" class>
+<p>It is also possible to choose another convention for representing a rotation with a matrix using Euler angles than the above convention above, and also choose other variation intervals for the angles, but in the end there is always at least one value for which a degree of freedom is lost.</p>
+<img src="/2019/12/11/Euler_Angel_and_Gimbal_lock/change_convention.gif" class>
+<h3 id="The-effect-of-gimbal-lock-in-attitude-algorithm"><span class="heading-link">The effect of gimbal lock in attitude algorithm</span></h3><p><span class="external-link"><a href="https://blog.csdn.net/bitaohu/article/details/80358773" target="_blank" rel="noopener">Euler Angle updates attitude</a><i class="fa fa-external-link"></i></span></p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+    \phi'\\
+    \theta'\\
+    \psi'
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & \tan \theta \sin \phi & \tan\theta\cos\phi \\
+0 & \cos \phi & -\sin\phi \\
+0 & \frac{\sin \phi}{\cos \theta} & \frac{\cos \phi}{\cos \theta}
+\end{bmatrix}
+\begin{bmatrix}
+^b \omega _x \\
+^b \omega _y \\
+^b \omega _z
+\end{bmatrix}</script><p><span class="external-link"><a href="https://blog.csdn.net/bitaohu/article/details/80350256" target="_blank" rel="noopener">attitude calculation</a><i class="fa fa-external-link"></i></span></p>
+<h3 id="External-Links"><span class="heading-link">External Links</span></h3><ul>
+<li><span class="external-link"><a href="https://v.youku.com/v_show/id_XNzkyOTIyMTI=.html" target="_blank" rel="noopener">Gimble Lock ( video )</a><i class="fa fa-external-link"></i></span></li>
+<li><span class="external-link"><a href="https://zhuanlan.zhihu.com/p/38163558" target="_blank" rel="noopener">singularity in robotics</a><i class="fa fa-external-link"></i></span></li>
+</ul>
+</div><footer class="post-footer"><div class="post-end"><span>------ </span><span>End of text, thank you for reading</span><span> ------</span></div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-author-name">Author: </span><span class="post-copyright-author-value"><a href="http://www.VISLAM.com">Jiang XiuXiang</a></span></div><div class="post-copyright-link"><span class="post-copyright-link-name">Link: </span><span class="post-copyright-link-value"><a href="http://www.vislam.com/2019/12/11/Euler_Angel_and_Gimbal_lock/">http://www.vislam.com/2019/12/11/Euler_Angel_and_Gimbal_lock/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-notice-name">Copyright: </span><span class="post-copyright-notice-value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="http://www.vislam.com/tags/Gimbal-Lock/">Gimbal Lock</a></span><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="http://www.vislam.com/tags/Euler-Angel/">Euler Angel</a></span></div><nav class="paginator"><div class="paginator-post"><div class="paginator-post-prev"><a class="paginator-post-prev__a" href="/2019/12/13/Some-Links-about-Rotation/"><i class="fa fa-chevron-left"></i><span>Some wiki Links about Rotation</span></a></div><div class="paginator-post-next"><a class="paginator-post-next__a" href="/2019/12/10/About-My-Blog/"><span>About My Blog</span><i class="fa fa-chevron-right"></i></a></div></div></nav></footer></div></div></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Euler-Angel-and-Gimbal-lock"><span class="toc-number">1.</span> <span class="toc-text">Euler Angel and Gimbal lock</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-Euler-Angel"><span class="toc-number">1.1.</span> <span class="toc-text">what is Euler Angel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-is-gimbal"><span class="toc-number">1.2.</span> <span class="toc-text">what is gimbal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gimbal-lock-in-coordinate-system"><span class="toc-number">1.3.</span> <span class="toc-text">Gimbal lock in coordinate system</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#normal-situation"><span class="toc-number">1.3.1.</span> <span class="toc-text">normal situation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gimbal-Lock-situation"><span class="toc-number">1.3.2.</span> <span class="toc-text">Gimbal Lock situation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what’s-the-effect-of-gimbal-lock"><span class="toc-number">1.4.</span> <span class="toc-text">what’s the effect of gimbal lock</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-effect-of-gimbal-lock-in-video-game"><span class="toc-number">1.4.1.</span> <span class="toc-text">The effect of gimbal lock in video game</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-effect-of-gimbal-lock-in-attitude-algorithm"><span class="toc-number">1.4.2.</span> <span class="toc-text">The effect of gimbal lock in attitude algorithm</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#External-Links"><span class="toc-number">1.4.3.</span> <span class="toc-text">External Links</span></a></li></ol></li></ol></li></ol></div></section><!-- ov = overview --><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/author/vacuum_cleaning_robot_192px.png" alt="avatar"></div><p class="sidebar-ov-author__p">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state__a posts" href="/archives/"><div class="sidebar-ov-state__a--count">7</div><div class="sidebar-ov-state__a--name">Archives</div></a><a class="sidebar-ov-state__a categories" href="/categories/"><div class="sidebar-ov-state__a--count">0</div><div class="sidebar-ov-state__a--name">Categories</div></a><a class="sidebar-ov-state__a tags" href="/tags/"><div class="sidebar-ov-state__a--count">7</div><div class="sidebar-ov-state__a--name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span>You have read </span><span class="sidebar-reading-info-num">0</span></div><div class="sidebar-reading-line"></div></div></div></aside><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>&copy; 2019</span><span class="fa fa-heart footer-icon"></span><span>Jiang XiuXiang.</span></div><div><span>Powered by <a href="http://hexo.io/" title="hexo" target="_blank" rel="noopener">hexo</a></span><span> v4.1.1.</span><span class="separator">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="stun" target="_blank" rel="noopener">stun</a></span><span> v1.5.4.</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="progress"></div></div><div class="back2top" id="back2top"><i class="back2top-icon fa fa-rocket"></i></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  $('.header-nav-search').on('click', function (e) {
+    e.stopPropagation();
+
+    $('body').css('overflow', 'hidden');
+    $('.search-popup')
+      .addClass('show')
+      .velocity('stop')
+      .velocity('transition.expandIn', {
+        duration: 300,
+        complete: function () {
+          $('.search-popup input').focus();
+        }
+      });
+    $('.search-mask')
+      .velocity('stop')
+      .velocity('transition.fadeIn', {
+        duration: 300
+      });
+
+    initSearch();
+  });
+
+  $('.search-mask, .search-close').on('click', function () {
+    closeSearch();
+  });
+
+  $(document).on('keydown', function (e) {
+    // Escape <=> 27
+    if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+      closeSearch();
+    }
+  });
+
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+
+  function initSearch() {
+    $.ajax({
+      url: path,
+      dataType: isXML ? 'xml' : 'json',
+      async: true,
+      success: function (res) {
+        var datas = isXML ? $('entry', res).map(function () {
+          // 将 XML 转为 JSON
+          return {
+            title: $('title', this).text(),
+            content: $('content', this).text(),
+            url: $('url', this).text()
+          };
+        }).get() : res;
+
+        var $input = $('.search-input input');
+        var $result = $('.search-results');
+
+        // 搜索对象（标题、内容）的权重，影响显示顺序
+        var WEIGHT = { title: 100, content: 1 };
+
+        var searchPost = function () {
+          var searchText = $input.val().toLowerCase().trim();
+          // 根据空白字符分隔关键字
+          var keywords = searchText.split(/[\s]+/);
+          // 搜索结果
+          var matchPosts = [];
+
+          // 有多个关键字时，将原文字整个保存下来
+          if (keywords.length > 1) {
+            keywords.push(searchText);
+          }
+
+          // 防止未输入字符时搜索
+          if (searchText.length > 0) {
+            datas.forEach(function (data) {
+              var isMatch  = false;
+
+              // 没有标题的文章使用预设的 i18n 变量代替
+              var title = (data.title && data.title.trim()) || '[ Untitled ]';
+              var titleLower = title && title.toLowerCase();
+              // 删除 HTML 标签 和 所有空白字符
+              var content = data.content && data.content.replace(/<[^>]+>/g, '');
+              var contentLower = content && content.toLowerCase();
+              // 删除重复的 /
+              var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+
+              // 标题中匹配到的关键词
+              var titleHitSlice = [];
+              // 内容中匹配到的关键词
+              var contentHitSlice = [];
+
+              keywords.forEach(function (keyword) {
+                /**
+                  * 获取匹配的关键词的索引
+                  * @param {String} keyword 要匹配的关键字
+                  * @param {String} text 原文字
+                  * @param {Boolean} caseSensitive 是否区分大小写
+                  * @param {Number} weight 匹配对象的权重。权重大的优先显示
+                  * @return {Array}
+                  */
+                function getIndexByword (word, text, caseSensitive, weight) {
+                  if (!word || !text) return [];
+
+                  var startIndex = 0; // 每次匹配的开始索引
+                  var index = -1;     // 匹配到的索引值
+                  var result = [];    // 匹配结果
+
+                  if (!caseSensitive) {
+                    word = word.toLowerCase();
+                    text = text.toLowerCase();
+                  }
+
+                  while((index = text.indexOf(word, startIndex)) !== -1) {
+                    var hasMatch = false;
+
+                    // 索引位置相同的关键词，保留长度较长的
+                    titleHitSlice.forEach(function (hit) {
+                      if (hit.index === index && hit.word.length < word.length) {
+                        hit.word = word;
+                        hasMatch = true;
+                      }
+                    });
+                    startIndex = index + word.length;
+                    !hasMatch && result.push({ index: index, word: word, weight: weight });
+                  }
+
+                  return result;
+                }
+
+                titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+                contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+              });
+
+              var hitTitle = titleHitSlice.length;
+              var hitContent = contentHitSlice.length;
+
+              if (hitTitle > 0 || hitContent > 0) {
+                isMatch = true;
+              }
+
+              if (isMatch) {
+                ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                  // 按照匹配文字的索引的递增顺序排序
+                  hit.sort(function (left, right) {
+                    return left.index - right.index;
+                  });
+                });
+
+                /**
+                  * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+                  * @param {String} text 原文本
+                  * @param {Array} hitSlice 匹配项的索引信息
+                  * @param {Number} start 开始索引
+                  * @param {Number} end 结束索引
+                  * @return {String}
+                  */
+                function highlightKeyword (text, hitSlice, start, end) {
+                  if (!text || !hitSlice || !hitSlice.length) return;
+
+                  var result = '';
+                  var startIndex = start;
+                  var endIndex = end;
+
+                  hitSlice.forEach(function (hit) {
+                    if (hit.index < startIndex) return;
+
+                    var hitWordEnd = hit.index + hit.word.length;
+
+                    result += text.slice(startIndex, hit.index);
+                    result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                    startIndex = hitWordEnd;
+                  });
+                  result += text.slice(startIndex, endIndex);
+
+                  return result;
+                }
+
+                var postData = {};
+                // 文章总的搜索权重
+                var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+                // 标记匹配关键词后的标题
+                var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+                // 标记匹配关键词后的内容
+                var postContent;
+                // 显示内容的长度
+                var SHOW_WORD_LENGTH = 200;
+                // 命中关键词前的字符显示长度
+                var SHOW_WORD_FRONT_LENGTH = 20;
+                var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+                // 截取匹配的第一个字符，前后共 200 个字符来显示
+                if (contentHitSlice.length > 0) {
+                  var firstIndex = contentHitSlice[0].index;
+                  var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                  var end = firstIndex + SHOW_WORD_END_LENGTH;
+
+                  postContent = highlightKeyword(content, contentHitSlice, start, end);
+                } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                  postContent = content.slice(0, SHOW_WORD_LENGTH);
+                }
+
+                postData.title = postTitle;
+                postData.content = postContent;
+                postData.url = postURL;
+                postData.weight = postWeight;
+                matchPosts.push(postData);
+              }
+            });
+          }
+
+          var resultInnerHtml = '';
+
+          if (matchPosts.length) {
+            // 按权重递增的顺序排序，使权重大的优先显示
+            matchPosts.sort(function (left, right) {
+              return right.weight - left.weight;
+            });
+
+            resultInnerHtml += '<ul>';
+            matchPosts.forEach(function (post) {
+              resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+              resultInnerHtml += post.title;
+              resultInnerHtml += '</a><div class="search-results-content">';
+              resultInnerHtml += post.content;
+              resultInnerHtml += '</div></li>';
+            });
+            resultInnerHtml += '</ul>';
+          } else {
+            resultInnerHtml += '<div class="search-results-none"><i class="fa fa-meh-o"></i></div>';
+          }
+
+          $result.html(resultInnerHtml);
+        };
+
+        $input.on('input', searchPost);
+        $input.on('keypress', function (e) {
+          if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+            searchPost();
+          }
+        });
+      }
+    });
+  }
+
+  function closeSearch () {
+    $('body').css('overflow', 'auto');
+    $('.search-popup')
+      .removeClass('show')
+      .velocity('stop')
+      .velocity('transition.expandOut', {
+        duration: 300
+      });
+    $('.search-mask')
+      .velocity('stop')
+      .velocity('transition.fadeOut', {
+        duration: 300
+      });
+  }
+}, false);</script><script type="text/x-mathjax-config">var mathjaxMhchem = '';
+var mathJaxTex = {
+  equationNumbers: {
+    autoNumber: "AMS"
+  }
+};
+
+if (false) {
+  mathjaxMhchem = 'https://cdn.jsdelivr.net/npm/mathjax-mhchem@3.3.2/mhchem.min.js';
+  MathJax.Ajax.config.path['mhchem'] = mathjaxMhchem;
+
+  mathJaxTex.extensions = [mathjaxMhchem];
+} else {
+  mathJaxTex.extensions = ["AMSmath.js","AMSsymbols.js"];
+}
+
+MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: mathJaxTex,
+  tex2jax: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [["\\[", "\\]"]],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+  MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+    if (data.display) {
+      var next = data.script.nextSibling;
+      while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling; }
+      if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next); }
+    }
+  });
+});
+
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i = 0; i < all.length; i++) {
+    document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/js/utils.js?v=1.5.4"></script><script src="/js/stun-boot.js?v=1.5.4"></script><script src="/js/scroll.js?v=1.5.4"></script><script src="/js/header.js?v=1.5.4"></script><script src="/js/sidebar.js?v=1.5.4"></script></body></html>
