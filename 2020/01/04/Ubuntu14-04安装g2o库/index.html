@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="keywords" content="Jiang XiuXiang, SLAM"><meta name="description" content=""><title>Ubuntu14.04安装g2o库</title><link rel="icon" href="/images/icons/vacuum_cleaning_robot_16px.png?v=1.5.4" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/vacuum_cleaning_robot_32px.png?v=1.5.4" type="image/png" sizes="32x32"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.5.4"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontawesome: {"prefix":"fa"},
+  sidebar: {"offsetTop":"30px","renderTocDepth":4},
+  header: {"scrollDownIcon":true},
+  back2top: {"enable":true},
+  reward: false,
+  fancybox: false,
+  zoom_image: {"enable":true,"mask_color":"rgba(0,0,0,0.6)"},
+  gallery_waterfall: undefined,
+  lazyload: undefined,
+  pjax: undefined,
+  external_link: {"icon":{"enable":true,"name":"external-link"}},
+  shortcuts: {"switch_post":false},
+  prompt: {"copy_success":"Copy Success","copy_error":"Copy Error","creative_commons":"Creative Commons","copy_button":"Click to Copy"}
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 4.1.1"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>Home</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>Archives</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>Categories</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>Tags</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/about/"><i class="fa fa-user"></i>About</a></div></div><div class="header-nav-search"><i class="fa fa-search"></i><span>Search</span></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">SLAM</div><div class="header-info-subtitle">Robotics SLAM ...</div></div><div class="header-info-scrolldown"><i class="fa fa-angle-down header-info-scrolldown__icon"></i></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content"><div class="post"><header class="post-header"><h1 class="post-header-title">Ubuntu14.04安装g2o库</h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2020-01-04</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2020-01-04</span></span></div></header><div class="post-body"><p>跑高翔大神的14讲的g2o例程时，出现的问题的解决方案</p>
+<p>跑高翔的14讲的第6讲的g2o例程出问题，包括</p>
+<p>1，g2o库make不成功</p>
+<p>2，g2o库make成功，install成功，以为g2o安装好了，编译例程就会出现如下错误</p>
+<p><img src="https://img-blog.csdn.net/20171210215201960?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQval9fX19fag==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
+<p>解决问题的过程：</p>
+<p>一，删除g2o库</p>
+<p>g2o会安装在usr\local\bin,usr\local\include,usr\local\lib三个文件夹中，进入这三个文件夹，在终端输入</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf *g2o*</span><br></pre></td></tr></table></div></figure>
+<p>可以把有关g2o的文件都删掉</p>
+<p>二，安装依赖项</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install cmake libeigen3-dev libsuitesparse-dev libqt4-dev qt4-qmake libqglviewer-dev</span><br></pre></td></tr></table></div></figure>
+<p>这个时候我的电脑上报错了，出现</p>
+<blockquote>
+<p>您可能需要运行“apt-get -f install”来纠正下列错误：<br>下列软件包有未满足的依赖关系：<br> libqglviewer-qt4-dev : 依赖: libqglviewer-dev-common (= 2.3.4-4ubuntu2) 但无法安装它<br>E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运行“apt-get -f install”(也可以指定一个解决办法)。</p>
+</blockquote>
+<p>按照它的建议，输入：</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -f install</span><br></pre></td></tr></table></div></figure>
+<p>然后再输入一遍安装依赖项的命令：</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -f install cmake libeigen3-dev libsuitesparse-dev libqt4-dev qt4-qmake libqglviewer-dev</span><br></pre></td></tr></table></div></figure>
+<p>三，安装G2O</p>
+<p>可以用高翔在git上的包，一可以从这里clone下来</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/RainerKuemmerle/g2o.git</span><br></pre></td></tr></table></div></figure>
+<p>（有人说用高翔的包装不上，因为我两个包都下载了，后来已经分不清哪个是哪个了，所以我忘了解决掉这个问题的时候是用的高翔的g2o包还是从上面这个git上clone下来的）</p>
+<p>然后进入g2o文件夹，执行cmake编译</p>
+<figure class="highlight shell"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></div></figure>
+<p>我这样就解决了～</p>
+<p>附件： </p>
+<p>下面贴出我在安装依赖项时的日志</p>
+<blockquote>
+<p>XX@XX-XXXX-XXX-XXX:~$ <strong>sudo apt-get install cmake libeigen3-dev libsuitesparse-dev libqt4-dev qt4-qmake libqglviewer-dev</strong><br>[sudo] jj 的密码：<br>正在读取软件包列表… 完成<br>正在分析软件包的依赖关系树<br>正在读取状态信息… 完成<br>libqt4-dev 已经是最新版 (4:4.8.7+dfsg-5ubuntu2)。<br>libsuitesparse-dev 已经是最新版 (1:4.4.6-1)。<br>qt4-qmake 已经是最新版 (4:4.8.7+dfsg-5ubuntu2)。<br>libeigen3-dev 已经是最新版 (3.3~beta1-2)。<br>libqglviewer-dev 已经是最新版 (2.6.3+dfsg1-1)。<br>cmake 已经是最新版 (3.5.1-1ubuntu3)。<br>您可能需要运行“apt-get -f install”来纠正下列错误：<br>下列软件包有未满足的依赖关系：<br> libqglviewer-qt4-dev : 依赖: libqglviewer-dev-common (= 2.3.4-4ubuntu2) 但无法安装它<br>E: 有未能满足的依赖关系。请尝试不指明软件包的名字来运行“apt-get -f install”(也可以指定一个解决办法)。<br>XX@XX-XXXX-XXX-XXX:~$ <strong>sudo apt-get -f install</strong><br>正在读取软件包列表… 完成<br>正在分析软件包的依赖关系树<br>正在读取状态信息… 完成<br>正在修复依赖关系… 完成<br>下列软件包是自动安装的并且现在不需要了：<br> libjpeg62<br>使用’sudo apt autoremove’来卸载它(它们)。<br>下列软件包将被【卸载】：<br> libqglviewer-qt4-dev<br>升级了 0 个软件包，新安装了 0 个软件包，要卸载 1 个软件包，有 202 个软件包未被升级。<br>有 1 个软件包没有被完全安装或卸载。<br>解压缩后将会空出 1,392 kB 的空间。<br>您希望继续执行吗？ [Y/n] <strong>Y</strong><br>(正在读取数据库 … 系统当前共安装有 266147 个文件和目录。)<br>正在卸载 libqglviewer-qt4-dev (2.3.4-4ubuntu2) …<br>XX@XX-XXXX-XXX-XXX:~$ <strong>sudo apt-get -f install cmake libeigen3-dev libsuitesparse-dev libqt4-dev qt4-qmake libqglviewer-dev</strong><br>正在读取软件包列表… 完成<br>正在分析软件包的依赖关系树<br>正在读取状态信息… 完成<br>libqt4-dev 已经是最新版 (4:4.8.7+dfsg-5ubuntu2)。<br>libsuitesparse-dev 已经是最新版 (1:4.4.6-1)。<br>qt4-qmake 已经是最新版 (4:4.8.7+dfsg-5ubuntu2)。<br>libeigen3-dev 已经是最新版 (3.3~beta1-2)。<br>libqglviewer-dev 已经是最新版 (2.6.3+dfsg1-1)。<br>cmake 已经是最新版 (3.5.1-1ubuntu3)。<br>下列软件包是自动安装的并且现在不需要了：<br> libjpeg62<br>使用’sudo apt autoremove’来卸载它(它们)。<br>升级了 0 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 202 个软件包未被升级。</p>
+<p>本文原发于<span class="external-link"><a href="https://blog.csdn.net/j_____j/article/details/78767653" target="_blank" rel="noopener">我的CSDN博客</a><i class="fa fa-external-link"></i></span>，迁移至此</p>
+</blockquote>
+</div><footer class="post-footer"><div class="post-end"><span>------ </span><span>End of text, thank you for reading</span><span> ------</span></div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-author-name">Author: </span><span class="post-copyright-author-value"><a href="http://www.VISLAM.com">Jiang XiuXiang</a></span></div><div class="post-copyright-link"><span class="post-copyright-link-name">Link: </span><span class="post-copyright-link-value"><a href="http://www.vislam.com/2020/01/04/Ubuntu14-04%E5%AE%89%E8%A3%85g2o%E5%BA%93/">http://www.vislam.com/2020/01/04/Ubuntu14-04%E5%AE%89%E8%A3%85g2o%E5%BA%93/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-notice-name">Copyright: </span><span class="post-copyright-notice-value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="http://www.vislam.com/tags/Ubuntu/">Ubuntu</a></span></div><nav class="paginator"><div class="paginator-post"><div class="paginator-post-next"><a class="paginator-post-next__a" href="/2020/01/01/vio_data_simulation/"><span>vio data simulation</span><i class="fa fa-chevron-right"></i></a></div></div></nav></footer></div></div></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><div></div></section><!-- ov = overview --><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/author/vacuum_cleaning_robot_192px.png" alt="avatar"></div><p class="sidebar-ov-author__p">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state__a posts" href="/archives/"><div class="sidebar-ov-state__a--count">14</div><div class="sidebar-ov-state__a--name">Archives</div></a><a class="sidebar-ov-state__a categories" href="/categories/"><div class="sidebar-ov-state__a--count">3</div><div class="sidebar-ov-state__a--name">Categories</div></a><a class="sidebar-ov-state__a tags" href="/tags/"><div class="sidebar-ov-state__a--count">9</div><div class="sidebar-ov-state__a--name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span>You have read </span><span class="sidebar-reading-info-num">0</span></div><div class="sidebar-reading-line"></div></div></div></aside><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>&copy; 2020</span><span class="fa fa-heart footer-icon"></span><span>Jiang XiuXiang.</span></div><div><span>Powered by <a href="http://hexo.io/" title="hexo" target="_blank" rel="noopener">hexo</a></span><span> v4.1.1.</span><span class="separator">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="stun" target="_blank" rel="noopener">stun</a></span><span> v1.5.4.</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="progress"></div></div><div class="back2top" id="back2top"><i class="back2top-icon fa fa-rocket"></i></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="Search for Posts (Support multiple keywords)"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  $('.header-nav-search').on('click', function (e) {
+    e.stopPropagation();
+
+    $('body').css('overflow', 'hidden');
+    $('.search-popup')
+      .addClass('show')
+      .velocity('stop')
+      .velocity('transition.expandIn', {
+        duration: 300,
+        complete: function () {
+          $('.search-popup input').focus();
+        }
+      });
+    $('.search-mask')
+      .velocity('stop')
+      .velocity('transition.fadeIn', {
+        duration: 300
+      });
+
+    initSearch();
+  });
+
+  $('.search-mask, .search-close').on('click', function () {
+    closeSearch();
+  });
+
+  $(document).on('keydown', function (e) {
+    // Escape <=> 27
+    if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+      closeSearch();
+    }
+  });
+
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+
+  function initSearch() {
+    $.ajax({
+      url: path,
+      dataType: isXML ? 'xml' : 'json',
+      async: true,
+      success: function (res) {
+        var datas = isXML ? $('entry', res).map(function () {
+          // 将 XML 转为 JSON
+          return {
+            title: $('title', this).text(),
+            content: $('content', this).text(),
+            url: $('url', this).text()
+          };
+        }).get() : res;
+
+        var $input = $('.search-input input');
+        var $result = $('.search-results');
+
+        // 搜索对象（标题、内容）的权重，影响显示顺序
+        var WEIGHT = { title: 100, content: 1 };
+
+        var searchPost = function () {
+          var searchText = $input.val().toLowerCase().trim();
+          // 根据空白字符分隔关键字
+          var keywords = searchText.split(/[\s]+/);
+          // 搜索结果
+          var matchPosts = [];
+
+          // 有多个关键字时，将原文字整个保存下来
+          if (keywords.length > 1) {
+            keywords.push(searchText);
+          }
+
+          // 防止未输入字符时搜索
+          if (searchText.length > 0) {
+            datas.forEach(function (data) {
+              var isMatch  = false;
+
+              // 没有标题的文章使用预设的 i18n 变量代替
+              var title = (data.title && data.title.trim()) || '[ Untitled ]';
+              var titleLower = title && title.toLowerCase();
+              // 删除 HTML 标签 和 所有空白字符
+              var content = data.content && data.content.replace(/<[^>]+>/g, '');
+              var contentLower = content && content.toLowerCase();
+              // 删除重复的 /
+              var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+
+              // 标题中匹配到的关键词
+              var titleHitSlice = [];
+              // 内容中匹配到的关键词
+              var contentHitSlice = [];
+
+              keywords.forEach(function (keyword) {
+                /**
+                  * 获取匹配的关键词的索引
+                  * @param {String} keyword 要匹配的关键字
+                  * @param {String} text 原文字
+                  * @param {Boolean} caseSensitive 是否区分大小写
+                  * @param {Number} weight 匹配对象的权重。权重大的优先显示
+                  * @return {Array}
+                  */
+                function getIndexByword (word, text, caseSensitive, weight) {
+                  if (!word || !text) return [];
+
+                  var startIndex = 0; // 每次匹配的开始索引
+                  var index = -1;     // 匹配到的索引值
+                  var result = [];    // 匹配结果
+
+                  if (!caseSensitive) {
+                    word = word.toLowerCase();
+                    text = text.toLowerCase();
+                  }
+
+                  while((index = text.indexOf(word, startIndex)) !== -1) {
+                    var hasMatch = false;
+
+                    // 索引位置相同的关键词，保留长度较长的
+                    titleHitSlice.forEach(function (hit) {
+                      if (hit.index === index && hit.word.length < word.length) {
+                        hit.word = word;
+                        hasMatch = true;
+                      }
+                    });
+                    startIndex = index + word.length;
+                    !hasMatch && result.push({ index: index, word: word, weight: weight });
+                  }
+
+                  return result;
+                }
+
+                titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+                contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+              });
+
+              var hitTitle = titleHitSlice.length;
+              var hitContent = contentHitSlice.length;
+
+              if (hitTitle > 0 || hitContent > 0) {
+                isMatch = true;
+              }
+
+              if (isMatch) {
+                ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                  // 按照匹配文字的索引的递增顺序排序
+                  hit.sort(function (left, right) {
+                    return left.index - right.index;
+                  });
+                });
+
+                /**
+                  * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+                  * @param {String} text 原文本
+                  * @param {Array} hitSlice 匹配项的索引信息
+                  * @param {Number} start 开始索引
+                  * @param {Number} end 结束索引
+                  * @return {String}
+                  */
+                function highlightKeyword (text, hitSlice, start, end) {
+                  if (!text || !hitSlice || !hitSlice.length) return;
+
+                  var result = '';
+                  var startIndex = start;
+                  var endIndex = end;
+
+                  hitSlice.forEach(function (hit) {
+                    if (hit.index < startIndex) return;
+
+                    var hitWordEnd = hit.index + hit.word.length;
+
+                    result += text.slice(startIndex, hit.index);
+                    result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                    startIndex = hitWordEnd;
+                  });
+                  result += text.slice(startIndex, endIndex);
+
+                  return result;
+                }
+
+                var postData = {};
+                // 文章总的搜索权重
+                var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+                // 标记匹配关键词后的标题
+                var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+                // 标记匹配关键词后的内容
+                var postContent;
+                // 显示内容的长度
+                var SHOW_WORD_LENGTH = 200;
+                // 命中关键词前的字符显示长度
+                var SHOW_WORD_FRONT_LENGTH = 20;
+                var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+                // 截取匹配的第一个字符，前后共 200 个字符来显示
+                if (contentHitSlice.length > 0) {
+                  var firstIndex = contentHitSlice[0].index;
+                  var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                  var end = firstIndex + SHOW_WORD_END_LENGTH;
+
+                  postContent = highlightKeyword(content, contentHitSlice, start, end);
+                } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                  postContent = content.slice(0, SHOW_WORD_LENGTH);
+                }
+
+                postData.title = postTitle;
+                postData.content = postContent;
+                postData.url = postURL;
+                postData.weight = postWeight;
+                matchPosts.push(postData);
+              }
+            });
+          }
+
+          var resultInnerHtml = '';
+
+          if (matchPosts.length) {
+            // 按权重递增的顺序排序，使权重大的优先显示
+            matchPosts.sort(function (left, right) {
+              return right.weight - left.weight;
+            });
+
+            resultInnerHtml += '<ul>';
+            matchPosts.forEach(function (post) {
+              resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+              resultInnerHtml += post.title;
+              resultInnerHtml += '</a><div class="search-results-content">';
+              resultInnerHtml += post.content;
+              resultInnerHtml += '</div></li>';
+            });
+            resultInnerHtml += '</ul>';
+          } else {
+            resultInnerHtml += '<div class="search-results-none"><i class="fa fa-meh-o"></i></div>';
+          }
+
+          $result.html(resultInnerHtml);
+        };
+
+        $input.on('input', searchPost);
+        $input.on('keypress', function (e) {
+          if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+            searchPost();
+          }
+        });
+      }
+    });
+  }
+
+  function closeSearch () {
+    $('body').css('overflow', 'auto');
+    $('.search-popup')
+      .removeClass('show')
+      .velocity('stop')
+      .velocity('transition.expandOut', {
+        duration: 300
+      });
+    $('.search-mask')
+      .velocity('stop')
+      .velocity('transition.fadeOut', {
+        duration: 300
+      });
+  }
+}, false);</script><script type="text/x-mathjax-config">var mathjaxMhchem = '';
+var mathJaxTex = {
+  equationNumbers: {
+    autoNumber: "AMS"
+  }
+};
+
+if (false) {
+  mathjaxMhchem = 'https://cdn.jsdelivr.net/npm/mathjax-mhchem@3.3.2/mhchem.min.js';
+  MathJax.Ajax.config.path['mhchem'] = mathjaxMhchem;
+
+  mathJaxTex.extensions = [mathjaxMhchem];
+} else {
+  mathJaxTex.extensions = ["AMSmath.js","AMSsymbols.js"];
+}
+
+MathJax.Hub.Config({
+  menuSettings: {
+    zoom: "None"
+  },
+  showMathMenu: false,
+  jax: ["input/TeX","output/CommonHTML"],
+  extensions: ["tex2jax.js"],
+  TeX: mathJaxTex,
+  tex2jax: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [["\\[", "\\]"]],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+
+MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+  MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+    if (data.display) {
+      var next = data.script.nextSibling;
+      while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling; }
+      if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next); }
+    }
+  });
+});
+
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i = 0; i < all.length; i++) {
+    document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/js/utils.js?v=1.5.4"></script><script src="/js/stun-boot.js?v=1.5.4"></script><script src="/js/scroll.js?v=1.5.4"></script><script src="/js/header.js?v=1.5.4"></script><script src="/js/sidebar.js?v=1.5.4"></script></body></html>
